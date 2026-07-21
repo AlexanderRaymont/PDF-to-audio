@@ -17,7 +17,7 @@ class TextReader():
     def get_voices(self):
         voices =self.engine.getProperty('voices')
         for i in voices:
-            print(i.gender)
+            print(i.languages)
         self.engine.setProperty('voice', voices[1].id)
 
 
@@ -30,3 +30,4 @@ class TextReader():
 
 reader = TextReader()
 reader.read("Hi, how are you? My name is Larry")
+reader.get_voices()

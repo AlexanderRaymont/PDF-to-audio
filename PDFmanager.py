@@ -18,6 +18,7 @@ class PDFmanager():
             else:
                 self.chapter_destinations.append(i)
                 self.chapters.append(i['/Title'])
+        return self.chapters
 
     def setup(self):
         reader = PdfReader("example.pdf")
