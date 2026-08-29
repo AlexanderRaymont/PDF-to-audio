@@ -76,6 +76,7 @@ class PDFmanager():
                 counter1=counter2
         if(counter1 != counter2):
             splittext.append(text[counter1:counter2])
+        return splittext
         #[print(i) for i in splittext]
         #print(text)
 
