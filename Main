@@ -4,13 +4,75 @@ from TextReader import TextReader
 
 class Main():
     def __init__(self):
+        self.fileName = None
+        self.pdf_manager = None
+        self.reader = TextReader()
+        self.setup()
 
     def setup(self):
+        self.get_file_name_from_user()
+        self.pdf_manager = PDFmanager(self.fileName[0])
+        self.Main()
 
     def Main(self):
+        chapter = self.get_chapter_from_user()
+        chapterContent = self.pdf_manager.get_section_content(chapter)
+        self.reader.set_text_to_read(chapterContent)
+        self.reader.read_content()
 
 
     def get_chapter_from_user(self):
+        cleanInputFlag = 0
+        while(cleanInputFlag == 0):
+            self.pdf_manager.show_chapters()
+            userChapterChoice = input("Please select which chapter you want to listen to: ")
+            try:
+                userChapterChoice = int(userChapterChoice)
+            except:
+                print("Selection must be given as an integer")
+                continue
+            if(self.pdf_manager.check_max_chapters(userChapterChoice) and (userChapterChoice > 0)):
+                return userChapterChoice-1
+            else:
+                print("Invalid chapter selected")
+                continue
 
 
     def get_file_name_from_user(self):
+        fileList = os.listdir()
+        nFileList = []
+        acceptedExtensions = ["pdf"]
+        for f in fileList:
+            for extension in acceptedExtensions:
+                if(extension in f):
+                    nFileList.append([f,extension])
+                    break
+        cleanInputFlag=0
+        userAccept = 0
+        while(userAccept == 0):
+            while(cleanInputFlag == 0):
+                print("Please select file: ")
+                for i in range (0,len(nFileList)):
+                    print(str(i+1)+". "+nFileList[i][0])
+                userFile = input("Response: ")
+                try:
+                    userInput = int(userFile) 
+                    if(int(userFile) > len(nFileList)):
+                        print("Incorrect or Invalid input recieved, please try again!")
+                    else:
+                        cleanInputFlag = 1
+                except:
+                    print("Incorrect or Invalid input recieved, please try again!")
+            print("You have chosen the file: ", nFileList[userInput-1][0])
+            userAcceptInput = input("Is this the correct file?[y/n]: ").lower()
+            if(userAcceptInput == 'y'):
+                userAccept = 1
+            elif(userAcceptInput == 'n'):
+                userAccept = 0
+                cleanInputFlag = 0
+            else:
+                print("Incorrect or Invalid input recieved, please try again!")
+        self.fileName = nFileList[userInput-1]
+
+
+main = Main()
