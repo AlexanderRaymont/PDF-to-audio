@@ -41,6 +41,6 @@ class TextReader():
 
 
 
-reader = TextReader()
-reader.read("Hi, how are you? My name is Larry")
-reader.get_voices()
+#reader = TextReader()
+#reader.read("Hi, how are you? My name is Larry")
+#reader.get_voices()
