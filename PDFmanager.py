@@ -79,6 +79,6 @@ class PDFmanager():
 
 
 
-manager = PDFmanager("example.pdf")
-manager.get_section_content(4)
-manager.show_chapters()
+#manager = PDFmanager("example.pdf")
+#manager.get_section_content(4)
+#manager.show_chapters()
