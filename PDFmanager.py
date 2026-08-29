@@ -38,19 +38,18 @@ class PDFmanager():
         page_number = reader.get_num_pages() -1
         begin_location_page_number = reader.get_destination_page_number(self.chapter_destinations[begin_location])
         end_flag = 1
-        print(len(self.chapters))
+        #print(len(self.chapters))
         if(begin_location == len(self.chapters)-1 and end == -1):
             end = page_number
             end_location_page_number = page_number
             end_flag = 0
-            print("HERE")
         elif(end == -1):
             end = begin_location+1
             end_location_page_number = reader.get_destination_page_number(self.chapter_destinations[end])
         else:
             end_location_page_number = reader.get_destination_page_number(self.chapter_destinations[end])
         
-        print(begin_location_page_number,end_location_page_number)
+        #print(begin_location_page_number,end_location_page_number)
         text=""
         for i in range(begin_location_page_number,end_location_page_number+1):
             page = reader.pages[i]
@@ -73,7 +72,7 @@ class PDFmanager():
                 counter1=counter2
         if(counter1 != counter2):
             splittext.append(text[counter1:counter2])
-        [print(i) for i in splittext]
+        #[print(i) for i in splittext]
         #print(text)
 
 
