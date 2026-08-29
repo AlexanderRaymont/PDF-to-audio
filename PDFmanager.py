@@ -5,9 +5,10 @@ reader = PdfReader("example.pdf")
 
 
 class PDFmanager():
-    def __init__(self):
+    def __init__(self,file_name):
         self.chapters = []
         self.chapter_destinations = []
+        self.fName = file_name
         self.setup()
         
     
@@ -20,12 +21,20 @@ class PDFmanager():
                 self.chapters.append(i['/Title'])
         return self.chapters
 
+    def show_chapters(self):
+        if(len(self.chapters) == 0):
+            print("ERROR: NO CHAPTERS")
+            exit(1)
+        print("Chapters: ")
+        for i in range(0,len(self.chapters)):
+            print(str(i+1)+". "+self.chapters[i])
+
     def setup(self):
-        reader = PdfReader("example.pdf")
+        reader = PdfReader(self.fName)
         self.get_chapters(reader.outline)
 
     def get_section_content(self,begin_location,end = -1):
-        reader = PdfReader("example.pdf")
+        reader = PdfReader(self.fName)
         page_number = reader.get_num_pages() -1
         begin_location_page_number = reader.get_destination_page_number(self.chapter_destinations[begin_location])
         end_flag = 1
@@ -70,5 +79,6 @@ class PDFmanager():
 
 
 
-manager = PDFmanager()
+manager = PDFmanager("example.pdf")
 manager.get_section_content(4)
+manager.show_chapters()
