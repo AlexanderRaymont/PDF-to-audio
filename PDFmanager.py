@@ -10,7 +10,11 @@ class PDFmanager():
         self.chapter_destinations = []
         self.fName = file_name
         self.setup()
-        
+
+    def check_max_chapters(self,chapter):
+        if(chapter > len(self.chapters)):
+            return False
+        return True
     
     def get_chapters(self,clist):
         for i in clist:
