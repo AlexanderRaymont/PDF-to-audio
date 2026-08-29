@@ -53,7 +53,19 @@ class PDFmanager():
             elif(i == end_location_page_number and end_flag == 1):
                 page_content = page_content.split(self.chapters[end].split(" ")[0])[0]
             text += page_content
-        print(text)
+        text = text.replace('\n',' ')
+        splittext = []
+        counter1=0
+        counter2=0
+        prevList = ["q"]
+        for counter2 in range (0,len(text)):
+            if(text[counter2]=='.' and (text[counter2-1] not in prevList)):
+                splittext.append(text[counter1+1:counter2])
+                counter1=counter2
+        if(counter1 != counter2):
+            splittext.append(text[counter1:counter2])
+        [print(i) for i in splittext]
+        #print(text)
 
 
 
